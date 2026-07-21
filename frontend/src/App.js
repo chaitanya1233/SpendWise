@@ -61,15 +61,17 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const response = await fetch('http://localhost:8000/triage_expense', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const json = await response.json();
-      setResult(json);
-    } catch (err) { alert("Backend connection failed."); }
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/analyze`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!response.ok) throw new Error('Network response was not ok');
+        const json = await response.json();
+        setResult(json);
+      } catch (err) { alert("Backend connection failed: " + err.message); }
+
     setLoading(false);
   };
 
