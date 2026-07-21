@@ -9,7 +9,7 @@ app = FastAPI()
 # CORS Middleware
 origins = [
     "http://localhost:3000",
-    "https://spendwise-frontend.vercel.app" # Replace with your actual Vercel domain
+    "https://spend-wise-two-tau.vercel.app"
 ]
 
 app.add_middleware(
